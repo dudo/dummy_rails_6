@@ -1,0 +1,25 @@
+services:
+  bundle: &bundle
+    env_file: .env
+    stdin_open: true
+    tty: true
+    build: .
+    entrypoint: bundle
+    command: check
+    volumes:
+      - .:/usr/src/app:delegated
+      - bundle:/usr/local/bundle:delegated
+
+  app:
+    <<: *bundle
+    command: exec rails server -b 0.0.0.0
+    ports:
+      - 3000:3000
+
+  rspec:
+    <<: *bundle
+    entrypoint: bundle exec rspec
+    command: --version
+
+volumes:
+  bundle: {}
