@@ -21,5 +21,16 @@ services:
     entrypoint: bundle exec rspec
     command: --version
 
+  protoc:
+    build: .
+    entrypoint: bundle
+    command: |
+      exec grpc_tools_ruby_protoc
+      -I ./lib/protos --ruby_out=./lib/protobuf --twirp_ruby_out=./lib/protobuf
+      ./lib/protos/things.proto
+    volumes:
+      - .:/usr/src/app:delegated
+      - bundle:/usr/local/bundle:delegated
+
 volumes:
   bundle: {}

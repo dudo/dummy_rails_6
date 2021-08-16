@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+service Things {
+  rpc create (ThingParams) returns (ThingResponse);
+  rpc show (ThingParams) returns (ThingResponse);
+  rpc index (ThingFilter) returns (ThingList);
+  rpc update (ThingParams) returns (ThingResponse);
+  rpc destroy (ThingParams) returns (ThingResponse);
+}
+
+message ThingParams {
+  int32 id = 1;
+  string name = 2;
+}
+
+message ThingFilter {
+  string name = 1;
+}
+
+message ThingResponse {
+  int32 id = 1;
+  string name = 2;
+}
+
+message ThingList {
+  repeated ThingResponse things = 1;
+}

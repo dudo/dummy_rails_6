@@ -1,6 +1,13 @@
+FROM golang:1 AS go
+
+# Install necessary Go executable to build protos
+RUN go get github.com/twitchtv/twirp-ruby/protoc-gen-twirp_ruby
+
 FROM ruby:3
 
 LABEL maintainer="Brett Dudo <brett@dudo.io>"
+
+COPY --from=go /go/bin /usr/local/bin
 
 # Install dependencies
 RUN apt-get update -qq && apt-get install -y build-essential
