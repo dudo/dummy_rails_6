@@ -9,6 +9,7 @@ services:
     volumes:
       - .:/usr/src/app:delegated
       - bundle:/usr/local/bundle:delegated
+      - ~/Projects:/local
 
   app:
     <<: *bundle
