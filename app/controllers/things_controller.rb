@@ -1,5 +1,4 @@
 class ThingsController < ApplicationController
-  include ActsAsResource
   include ActionController::MimeResponds
 
   def index
